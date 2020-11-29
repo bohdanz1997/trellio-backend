@@ -25,10 +25,14 @@ export class CardsService {
   }
 
   update(id: number, updateCardDto: UpdateCardDto) {
-    return this.cards.update(id, updateCardDto)
+    return this.cards.save({
+      ...updateCardDto,
+      id,
+    })
   }
 
   async remove(id: number) {
-    return this.cards.delete(id)
+    await this.cards.delete(id)
+    return id
   }
 }
