@@ -7,7 +7,7 @@ version: 2.1
 workflows:
   build_and_push_image:
     jobs:
-      - aws-ecr/build-and-push-image
+      - aws-ecr/build-and-push-image:
           repo: ${MY_APP_PREFIX}
           dockerhub-username: $DOCKERHUB_USER
           dockerhub-password: $DOCKERHUB_PASSWORD
