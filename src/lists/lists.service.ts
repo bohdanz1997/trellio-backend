@@ -13,7 +13,7 @@ export class ListsService {
   ) {}
 
   create(createListDto: CreateListDto) {
-    return 'This action adds a new list'
+    return this.lists.save(createListDto)
   }
 
   findAll() {
@@ -25,10 +25,14 @@ export class ListsService {
   }
 
   update(id: number, updateListDto: UpdateListDto) {
-    return `This action updates a #${id} list`
+    return this.lists.save({
+      ...updateListDto,
+      id,
+    })
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} list`
+  async remove(id: number) {
+    await this.lists.delete(id)
+    return id
   }
 }
