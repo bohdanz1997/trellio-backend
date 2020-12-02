@@ -34,10 +34,10 @@ jobs:
       - run:
           name: test
           command: yarn test
-  deploy:
-    docker:
-      - image: $DOCKERHUB_IMAGE
-        auth:
-          username: $DOCKERHUB_USER
-          password: $DOCKERHUB_PASSWORD
+#  deploy:
+#    docker:
+#      - image: $DOCKERHUB_IMAGE
+#        auth:
+#          username: $DOCKERHUB_USER
+#          password: $DOCKERHUB_PASSWORD
 
