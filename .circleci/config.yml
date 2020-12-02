@@ -1,12 +1,23 @@
-orbs: # declare what orbs we are going to use
-  node: circleci/node@2.0.2 # the node orb provides common node-related configuration
+orbs:
+  aws-ecr: circleci/aws-ecr@6.15.0
+  aws-ecs: circleci/aws-ecs@1.4.0
 
-version: 2.1 # using 2.1 provides access to orbs and other features
+version: 2.1
 
 workflows:
-  build:
+  build_and_push_image:
     jobs:
-      - build
+      - aws-ecr/build-and-push-image
+          repo: trellio
+          dockerhub-username: $DOCKERHUB_USER
+          dockerhub-password: $DOCKERHUB_PASSWORD
+          docker-login: true
+      - aws-ecs/deploy-service-update:
+        requires:
+          - aws-ecr/build-and-push-image
+        family: '${MY_APP_PREFIX}-service'
+        cluster-name: '${MY_APP_PREFIX}-cluster'
+        container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 
 jobs:
   build:
@@ -23,3 +34,10 @@ jobs:
       - run:
           name: test
           command: yarn test
+  deploy:
+    docker:
+      - image: $DOCKERHUB_IMAGE
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
+
