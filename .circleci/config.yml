@@ -8,7 +8,7 @@ workflows:
   build_and_push_image:
     jobs:
       - aws-ecr/build-and-push-image
-          repo: trellio
+          repo: ${MY_APP_PREFIX}
           dockerhub-username: $DOCKERHUB_USER
           dockerhub-password: $DOCKERHUB_PASSWORD
           docker-login: true
