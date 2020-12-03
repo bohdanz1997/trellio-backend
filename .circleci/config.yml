@@ -5,16 +5,10 @@ orbs:
 version: 2.1
 
 workflows:
-  build_and_push_image:
+  build_and_deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
-          repo: ${MY_APP_PREFIX}
-      - aws-ecs/deploy-service-update:
-          requires:
-            - aws-ecr/build-and-push-image
-          family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}'
-          container-image-name-updates: 'container=sdgsdfgsdf,tag=${CIRCLE_SHA1}'
+      - build
+      - deploy
 
 jobs:
   build:
@@ -31,10 +25,12 @@ jobs:
       - run:
           name: test
           command: yarn test
-#  deploy:
-#    docker:
-#      - image: $DOCKERHUB_IMAGE
-#        auth:
-#          username: $DOCKERHUB_USER
-#          password: $DOCKERHUB_PASSWORD
+  deploy:
+    docker:
+      - image: circleci/node:14.15.1
+    steps:
+      - checkout
+      - run:
+          name: deploy
+          command: ./deploy.sh
 
