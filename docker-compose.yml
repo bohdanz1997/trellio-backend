@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  node:
+    container_name: trellio_node
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    ports:
+      - 3000:3000
+    networks:
+      - trellio
+  db:
+    container_name: trellio_db
+    image: mysql:5.7.12
+    restart: always
+    environment:
+      - MYSQL_DATABASE=trellio
+      - MYSQL_USER=trellio
+      - MYSQL_PASSWORD=trellio
+      - MYSQL_RANDOM_ROOT_PASSWORD=true
+    volumes:
+      - ./.app/database:/var/lib/mysql
+    networks:
+      - trellio
+    ports:
+      - 3020:3306
+
+networks:
+  trellio:
+    external: true
