@@ -2,9 +2,9 @@
 set -e
 
 # Up project
-docker-compose pull
-docker-compose down
-docker-compose up -d
+docker-compose -f docker-compose.prod.yml pull
+docker-compose -f docker-compose.prod.yml down
+docker-compose -f docker-compose.prod.yml up -d
 
 docker system prune --volumes -f
 
