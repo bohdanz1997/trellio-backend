@@ -11,6 +11,5 @@ RUN yarn
 
 COPY . /usr/src/app
 
-RUN rm -rf dist
 RUN yarn build
 CMD yarn start:prod
