@@ -8,9 +8,9 @@ workflows:
   build:
     jobs:
       - build
-  deploy:
-    jobs:
-      - deploy
+    deploy:
+      requires:
+        - build
 
 jobs:
   build:
