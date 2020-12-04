@@ -14,4 +14,4 @@ docker push "$NODE_APP_IMAGE":"$APP_VERSION_TAG"
 
 # Pull docker image to the server
 ssh-keyscan -H "$SSH_SERVER" >> ~/.ssh/known_hosts
-ssh "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; git pull origin && AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' ./pull-and-up-images.sh"
+ssh "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; git pull origin master && ./pull-and-up-images.sh"
