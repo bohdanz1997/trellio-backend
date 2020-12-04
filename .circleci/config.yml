@@ -40,8 +40,8 @@ jobs:
       - run:
           name: connect-ssh
           command: |
-            ssh-keyscan -H 54.242.60.92 >> ~/.ssh/known_hosts
-            ssh ubuntu@54.242.60.92 "pwd"
+            ssh-keyscan -H "$SSH_SERVER" >> ~/.ssh/known_hosts
+            ssh "$SSH_USER"@"$SSH_SERVER" "pwd"
 #      - run:
 #          name: deploy
 #          command: chmod +x ./deploy.sh && ./deploy.sh
