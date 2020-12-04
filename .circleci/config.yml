@@ -33,6 +33,9 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 19.03.13
+      - add_ssh_keys:
+          fingerprints:
+            - "95:d9:3b:5e:3e:94:9c:07:0d:f5:93:b2:82:65:21:25"
       - run:
           name: deploy
           command: chmod +x ./deploy.sh && ./deploy.sh
