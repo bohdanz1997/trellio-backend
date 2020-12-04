@@ -41,6 +41,7 @@ jobs:
           name: connect-ssh
           command: |
             ssh-add ~/.ssh/id_rsa_5ac0e826a8cae764ce5dff158030894d
+            ssh-keyscan -H 54.242.60.92 >> ~/.ssh/known_hosts
             cat ~/.ssh/config
             cat ~/.ssh/id_rsa_5ac0e826a8cae764ce5dff158030894d
             ssh -vvv ubuntu@54.242.60.92 "pwd"
