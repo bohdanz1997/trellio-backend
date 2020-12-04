@@ -18,4 +18,4 @@ set -e
 echo $SSH_USER
 echo $SSH_SERVER
 
-ssh "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' ./pull-and-up-images.sh"
+ssh -o 'IdentitiesOnly yes' "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' ./pull-and-up-images.sh"
