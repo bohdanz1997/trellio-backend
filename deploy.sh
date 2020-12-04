@@ -14,8 +14,5 @@ set -e
 #docker push "$NODE_APP_IMAGE":"$APP_VERSION_TAG"
 
 # Pull docker image to the server
-# Uncomment to fix ssh connection issue in circleci
-echo $SSH_USER
-echo $SSH_SERVER
-
-ssh -o 'IdentitiesOnly yes' "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' ./pull-and-up-images.sh"
+ssh-keyscan -H "$SSH_SERVER" >> ~/.ssh/known_hosts
+ssh "$SSH_USER"@"$SSH_SERVER" "cd /home/ubuntu/app; AWS_ACCESS_KEY_ID='$AWS_ACCESS_KEY_ID' AWS_SECRET_ACCESS_KEY='$AWS_SECRET_ACCESS_KEY' ./pull-and-up-images.sh"

@@ -38,11 +38,6 @@ jobs:
           fingerprints:
             - "5a:c0:e8:26:a8:ca:e7:64:ce:5d:ff:15:80:30:89:4d"
       - run:
-          name: connect-ssh
-          command: |
-            ssh-keyscan -H "$SSH_SERVER" >> ~/.ssh/known_hosts
-            ssh "$SSH_USER"@"$SSH_SERVER" "pwd"
-#      - run:
-#          name: deploy
-#          command: chmod +x ./deploy.sh && ./deploy.sh
+          name: deploy
+          command: chmod +x ./deploy.sh && ./deploy.sh
 
