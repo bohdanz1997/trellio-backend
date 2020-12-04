@@ -41,6 +41,7 @@ jobs:
           name: connect-ssh
           command: |
             cat ~/.ssh/config
+            cat ~/.ssh/id_rsa_5ac0e826a8cae764ce5dff158030894d
             ssh -vvv -o 'IdentitiesOnly yes' $SSH_USER@$SSH_SERVER "pwd"
 #      - run:
 #          name: deploy
