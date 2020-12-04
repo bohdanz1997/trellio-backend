@@ -37,7 +37,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "95:d9:3b:5e:3e:94:9c:07:0d:f5:93:b2:82:65:21:25"
-      - run:
-          name: deploy
-          command: chmod +x ./deploy.sh && ./deploy.sh
+       - run:
+           name: connect-ssh
+           command: ssh -o 'IdentitiesOnly yes' $SSH_USER@$SSH_SERVER "pwd"
+#      - run:
+#          name: deploy
+#          command: chmod +x ./deploy.sh && ./deploy.sh
 
