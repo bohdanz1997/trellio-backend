@@ -5,9 +5,11 @@ services:
     container_name: trellio_node
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: .docker/local/Dockerfile
     restart: unless-stopped
     working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
     ports:
       - 3000:3000
     networks:
